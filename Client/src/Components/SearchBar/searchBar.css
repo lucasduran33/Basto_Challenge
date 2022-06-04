@@ -1,0 +1,14 @@
+.SearchBar{
+}
+.inputSearch{
+width: 40%;
+}
+.buttonSearch{
+  background-color:#008f39;
+  color:white;
+  border:none;
+  border: 1px solid #008f39;
+  height: 30px;
+  border-radius: 0px;
+  font-weight: 600;
+}

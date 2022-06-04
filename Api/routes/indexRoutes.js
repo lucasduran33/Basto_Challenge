@@ -1,0 +1,116 @@
+const express = require('express')
+const router = express.Router()
+const Datas = require('../model/Datas')
+
+//Routes controllers
+
+
+// Get all data and query for the searchbar input
+router.get('/', (req,res)=>{
+    const {name} = req.query;
+try{
+    if(!name){
+        Datas.find()
+        .then(items => res.json(items))
+        .catch(err => res.status(400).json("Error" + err))
+    }else{
+        const dataName = name.toLowerCase();
+        console.log('soy name  ' + dataName)
+
+      const search =  Datas.find({ name: dataName},(err, data) =>{
+        if(err) {
+           res.send(err.message);
+        }
+        else{
+          res.send(data)
+        }})
+    
+    
+      
+    }
+
+}catch(err){
+    res.status(400).json("Error" + err)}
+});
+
+//Create Datas
+router.post('/newdata', async (req,res)=> {
+ const { 
+ type,
+ typeDisp,
+ numDisp,
+ weight,
+ name
+} = req.body
+const newDatas = new Datas({
+    type,
+    typeDisp,
+    numDisp,
+    weight,
+    name
+})
+
+try{
+  const newDate =  await newDatas.save()
+  res.status(200).json(newDate)
+  console.log(newDate)
+ }catch(err){
+res.status(500).json(err)
+console.log(err)
+ }
+  
+  
+})
+
+//Delete 
+router.delete('/delete/:id', async (req,res)=> {
+try{
+
+    const id = req.params.id
+ await Datas.findByIdAndDelete({_id : id})
+ res.status(200).json('Datas has been deleted...')
+
+}catch(err){
+    res.status(500).json(err)
+}
+})
+
+//Update data
+router.put('/put/:id', async (req,res)=> {
+  const oneData = Datas.find({_id:req.params.id})
+    const { 
+        type,
+        typeDisp,
+        numDisp,
+        weight,
+        name,
+        
+    } = req.body
+const updateData = {
+    type,
+    typeDisp,
+    numDisp,
+    weight,
+    name
+}
+        try{
+            console.log('soy req.body',req.body)
+            console.log('soy UpdateData',updateData)
+
+            await Datas.findByIdAndUpdate({_id: req.params.id},
+                {$set:updateData});
+            res.status(200).json(updateData)
+        
+        }catch(err){
+            req.statusCode(500).json(err)
+            console.log(err)
+
+        }
+    })
+
+
+
+
+
+
+module.exports = router;
