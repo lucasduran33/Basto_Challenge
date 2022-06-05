@@ -59,16 +59,18 @@ const paginado = (pageNumber) => {
 useEffect(()=> {
   dispatch(getDatas())
 
-},[])
+},[dispatch])
 
 
 
 function modalInsert(){
       if(modal === false){
-
         setModal(true)
+        
+        dispatch(getDatas())
       }else{
         setModal(false)
+        dispatch(getDatas())
       }
     }
     
@@ -76,9 +78,10 @@ function modalInsert(){
       if(modalEdit === false){
         setModalEdit(true)
         setInput(registro)
-        
+        dispatch(getDatas())
       }else{
         setModalEdit(false)
+        dispatch(getDatas())
         setInput({
           name:"",
           type:"",
@@ -96,21 +99,22 @@ function modalInsert(){
     }
 function deleteItemList(id){
   dispatch(deleteData(id))
-  setInput({
-    name:"",
-    type:"",
-    typeDisp:"",
-    numDisp:"",
-    weight:0,
-  })
   dispatch(getDatas())
+  dispatch(getDatas())
+  
 }
 function updateItemList(dato){
 dispatch(updateData(dato._id , input))
 setModalEdit(false)
-
 dispatch(getDatas())
-
+setInput({
+  name:"",
+  type:"",
+  typeDisp:"",
+  numDisp:"",
+  weight:0,
+})
+dispatch(getDatas())
 
 
 }
@@ -128,6 +132,9 @@ function handleSubmit(e){
   })
   dispatch(getDatas())
   setModal(false)
+  dispatch(getDatas())
+ 
+
 }
 
   return (

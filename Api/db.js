@@ -1,13 +1,17 @@
 const mongoose = require('mongoose')
+const dotenv = require('dotenv');
+dotenv.config()
+const {DATABASEURL} = process.env
 
 
-const url = 'mongodb://localhost/Basto_challenge'
 
+
+const url = DATABASEURL
 const db = mongoose.connect(url,{
 
 })
-.then(()=> console.log('conectado a mongo'))
-.catch((e)=> console.log('error a mongo'+ e)) 
+.then(()=> console.log('Database connection successful'))
+.catch((e)=> console.log('connection error '+ e)) 
 
 
 module.exports = db

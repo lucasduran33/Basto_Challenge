@@ -6,7 +6,7 @@ const Datas = require('../model/Datas')
 
 
 // Get all data and query for the searchbar input
-router.get('/', (req,res)=>{
+ router.get('/', (req,res)=>{
     const {name} = req.query;
 try{
     if(!name){
@@ -15,17 +15,36 @@ try{
         .catch(err => res.status(400).json("Error" + err))
     }else{
         const dataName = name.toLowerCase();
-        console.log('soy name  ' + dataName)
 
-      const search =  Datas.find({ name: dataName},(err, data) =>{
-        if(err) {
-           res.send(err.message);
+        if(dataName === 'toro' ||dataName === 'vaquilona' ||dataName === 'novillo' ){
+            Datas.find({type: dataName} ,(err, data) =>{
+                if(err) {
+                   res.send(err.message);
+                }
+                else{
+                  res.send(data)
+                }})
+        } if(dataName === 'collar' ||dataName === 'caravana'){
+            Datas.find({typeDisp: dataName} ,(err, data) =>{
+                if(err) {
+                   res.send(err.message);
+                }
+                else{
+                  res.send(data)
+                }})
+        }else{
+            Datas.find({name: dataName} ,(err, data) =>{
+                if(err) {
+                   res.send(err.message);
+                }
+                else{
+                  res.send(data)
+                }})
         }
-        else{
-          res.send(data)
-        }})
+     
+      
     
-    
+      
       
     }
 
@@ -53,17 +72,17 @@ const newDatas = new Datas({
 try{
   const newDate =  await newDatas.save()
   res.status(200).json(newDate)
-  console.log(newDate)
  }catch(err){
-res.status(500).json(err)
+res.status(500).json(err).send('Data values incorrect')
 console.log(err)
+
  }
   
   
 })
 
 //Delete 
-router.delete('/delete/:id', async (req,res)=> {
+ router.delete('/delete/:id', async (req,res)=> {
 try{
 
     const id = req.params.id
@@ -72,12 +91,12 @@ try{
 
 }catch(err){
     res.status(500).json(err)
-}
+}  console.log(err)
+
 })
 
 //Update data
 router.put('/put/:id', async (req,res)=> {
-  const oneData = Datas.find({_id:req.params.id})
     const { 
         type,
         typeDisp,
@@ -94,9 +113,7 @@ const updateData = {
     name
 }
         try{
-            console.log('soy req.body',req.body)
-            console.log('soy UpdateData',updateData)
-
+         
             await Datas.findByIdAndUpdate({_id: req.params.id},
                 {$set:updateData});
             res.status(200).json(updateData)
@@ -113,4 +130,4 @@ const updateData = {
 
 
 
-module.exports = router;
+    module.exports =router

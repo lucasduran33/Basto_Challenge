@@ -10,7 +10,6 @@ const SearchBar = () => {
     function handleSearch(e){
         e.preventDefault()
         setName(e.target.value)
-        console.log(name)
     }
 
     function handleSubmit(e){
@@ -18,11 +17,10 @@ const SearchBar = () => {
         
         dispatch(getDataName(name))
         setName("")
-        console.log(`aqui esta el submit ${name}`)
     }
   return (
     <div className='SearchBar'>
-    <input placeholder='Nombre/Numero de registro' className='inputSearch' type='text'
+    <input placeholder='Nombre/Tipo de animal/Tipo de Dispositivo' className='inputSearch' type='text'
      onChange={(e) => handleSearch(e)}
     />
     <button 

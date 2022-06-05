@@ -1,18 +1,24 @@
 import React from 'react';
 import './Paginado.css'
+import {useDispatch} from 'react-redux'
+import { getDatas} from '../../Redux/action'
 
 
 
 export default function Paginado ({dataPerPage, allData, paginado, setCurrentPage,currentPage}) { 
+    const dispatch = useDispatch()
 const pageNumbers = []
 for (let i = 1; i<= Math.ceil(allData/dataPerPage); i++){
     pageNumbers.push(i)
 }
 function handlePrev(){
     setCurrentPage(currentPage - 1)
+    dispatch(getDatas())
+
 }
 function handleNext(){
 setCurrentPage(currentPage + 1)
+dispatch(getDatas())
 }
 return (
     <nav className='pagi'>
