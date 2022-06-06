@@ -17,9 +17,12 @@ DATABASEURL = 'introduzca su url de base de datos'
 ejemplo : 
 
 PORT= 3001
+
 DATABASEURL= mongodb://localhost/Basto_challenge
 
 3)dentro de la carpeta api escribimos npm test y correran los test unitarios 
+
+(no ejecutar test con el servidor escuchando )
 
 4) dentro la carpeta api escribimos npm start y se estara ejecutando el server en node
 
@@ -31,3 +34,5 @@ DATABASEURL= mongodb://localhost/Basto_challenge
 2) escribimos en la terminal npm run dev 
 
  LISTO ! La aplicacion esta lista para ser ejecutada y probada 
+
+
