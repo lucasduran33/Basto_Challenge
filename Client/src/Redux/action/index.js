@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-
+//Functions to fetch server information through redux
 export const getDatas =() => dispatch => {
     return fetch('http://localhost:3001/')
     .then(res => res.json())
@@ -9,7 +9,7 @@ export const getDatas =() => dispatch => {
         payload:getdates
     }))
 }
-
+//POST
 export function postData (payload){
     return async function (dispatch){
         const response = axios.post('http://localhost:3001/newdata', payload)
@@ -17,7 +17,7 @@ export function postData (payload){
         return response;
     }
 }
-
+//DELETE
 export function deleteData (id){
     return async function (dispatch){
         const response = await axios.delete('http://localhost:3001/delete/'+ id);
@@ -25,7 +25,7 @@ export function deleteData (id){
     return response
         }
 }
-
+//PUT
 export function updateData (id, payload){
     return async function (dispatch){
         const response = await axios.put('http://localhost:3001/put/'+ id, payload);
@@ -34,6 +34,7 @@ export function updateData (id, payload){
         }
 }
 
+//SearchBar function
 export function getDataName (payload){
     return async function (dispatch){
       try{

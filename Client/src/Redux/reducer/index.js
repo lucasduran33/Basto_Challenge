@@ -2,6 +2,8 @@ const initialState ={
     datas:[]
 }
 
+//GLOBAL STATE 
+//managing information across a global state
 
 export default function rootReducer (state= initialState, action){
 switch(action.type){

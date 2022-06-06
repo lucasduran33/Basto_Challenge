@@ -6,17 +6,17 @@ const datasSchema = new mongoose.Schema(
             type:String,
             enum: ['novillo','toro','vaquillona'],
             default: 'novillo',
-            sparse: true
+           required:true
         },
         typeDisp:{type:String,
             enum: ['collar','caravana'],
             default: 'collar',
-            sparse: true
+            required:true
         },
-        numDisp:{unique: false, type:String, sparse: true},
-        weight: {unique: false, type:Number,  sparse: true},
-        name:{unique: false ,type:String,   sparse: true, },
-    
+        numDisp:{unique: false, type:String,required:true},
+        weight: {unique: false, type:Number,required:true },
+        name:{unique: false ,type:String, required:true  },
+
     },{ timeStamps:true}
     );
     module.exports = mongoose.model('Datas',datasSchema)

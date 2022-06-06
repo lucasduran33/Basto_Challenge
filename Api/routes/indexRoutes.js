@@ -9,30 +9,30 @@ const Datas = require('../model/Datas')
  router.get('/', (req,res)=>{
     const {name} = req.query;
 try{
-    if(!name){
-        Datas.find()
-        .then(items => res.json(items))
-        .catch(err => res.status(400).json("Error" + err))
-    }else{
+    if(name){
         const dataName = name.toLowerCase();
 
-        if(dataName === 'toro' ||dataName === 'vaquilona' ||dataName === 'novillo' ){
+        if(dataName === 'collar' ||dataName === 'caravana'){
+             Datas.find({typeDisp: dataName} ,(err, data) =>{
+                 if(err) {
+                    res.send(err.message);
+                 }
+                 else{
+                  res.send(data)
+                }})
+         }
+        else if(dataName === 'novillo' || dataName === 'toro' ||dataName === 'vaquillona'){
             Datas.find({type: dataName} ,(err, data) =>{
                 if(err) {
-                   res.send(err.message);
+                    res.send(err.message);
+
                 }
                 else{
-                  res.send(data)
+                    res.send(data)    
+
                 }})
-        } if(dataName === 'collar' ||dataName === 'caravana'){
-            Datas.find({typeDisp: dataName} ,(err, data) =>{
-                if(err) {
-                   res.send(err.message);
-                }
-                else{
-                  res.send(data)
-                }})
-        }else{
+        }
+      else{
             Datas.find({name: dataName} ,(err, data) =>{
                 if(err) {
                    res.send(err.message);
@@ -41,11 +41,20 @@ try{
                   res.send(data)
                 }})
         }
-     
+
+
+
+
+
+
+
+
       
+    }else{
+        Datas.find()
+        .then(items => res.json(items))
+        .catch(err => res.status(400).json("Error" + err))
     
-      
-      
     }
 
 }catch(err){

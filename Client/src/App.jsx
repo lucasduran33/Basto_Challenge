@@ -146,10 +146,10 @@ function handleSubmit(e){
     <div className="App">
 <div className='navbar'>
 <div className='bellop'>
-  <AiOutlineImport color='#5b5b5b' size={25}/>
+  <AiOutlineImport color='#008f39' size={25}/>
     </div>    
  <div className='outop'>
- <AiFillBell color='#5b5b5b' size={25}/>
+ <AiFillBell color='#008f39' size={25}/>
  </div>
 </div>
 <div> <h5 className='subtitle'>Admin/Dispositivos</h5></div>
