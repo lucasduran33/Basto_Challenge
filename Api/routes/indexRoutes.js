@@ -25,11 +25,9 @@ try{
             Datas.find({type: dataName} ,(err, data) =>{
                 if(err) {
                     res.send(err.message);
-
                 }
                 else{
                     res.send(data)    
-
                 }})
         }
       else{
@@ -41,15 +39,6 @@ try{
                   res.send(data)
                 }})
         }
-
-
-
-
-
-
-
-
-      
     }else{
         Datas.find()
         .then(items => res.json(items))
