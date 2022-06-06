@@ -52,7 +52,7 @@ try{
     res.status(400).json("Error" + err)}
 });
 
-//Create Datas
+//Create Datas Post route
 router.post('/newdata', async (req,res)=> {
  const { 
  type,
@@ -81,7 +81,7 @@ console.log(err)
   
 })
 
-//Delete 
+//Delete datas, Delete route
  router.delete('/delete/:id', async (req,res)=> {
 try{
 
@@ -91,7 +91,8 @@ try{
 
 }catch(err){
     res.status(500).json(err)
-}  console.log(err)
+    console.log(err)
+}  
 
 })
 

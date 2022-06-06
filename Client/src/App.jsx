@@ -3,12 +3,11 @@ import {useDispatch,useSelector} from 'react-redux'
 import { getDatas, postData, deleteData, updateData } from './Redux/action'
 import SearchBar from './Components/SearchBar/SearchBar'
 import Paginado from './Components/Paginado/Paginado'
-import {Table, Button, Container,Modal, ModalBody,ModalHeader,FormGroup,ModalFooter} from 'reactstrap'
+import {Table, Button,Modal, ModalBody,ModalHeader,FormGroup,ModalFooter} from 'reactstrap'
 import { AiOutlineForm,AiFillBell,AiFillDelete,AiOutlineImport } from "react-icons/ai";
-
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-//https://www.youtube.com/watch?v=A3xQx3uzyuc&t=30s&ab_channel=Inform%C3%A1ticaDP
+
 
 
 
@@ -17,7 +16,7 @@ function App() {
   
   const allDatas = useSelector((state) => state.datas)
 
-//Modal open-close
+//Modal open-close states
   const [modal, setModal] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
 
@@ -43,6 +42,7 @@ const disableSubmit = useMemo(() =>{
       return true;
   }
 },[input]);
+
 //Paginado Logic
 const [currentPage,setCurrentPage]= useState(1)// current page
 const [dataPerPage, setdataPerPage]= useState(4) //data per page
@@ -55,14 +55,13 @@ const paginado = (pageNumber) => {
 }
 
 
-
 useEffect(()=> {
   dispatch(getDatas())
 
 },[dispatch])
 
 
-
+//OPEN-CLOSE modal forms
 function modalInsert(){
       if(modal === false){
         setModal(true)
@@ -91,18 +90,23 @@ function modalInsert(){
         })
       }
     }
+
+    //Take inputs data
     function handleChange(e){
       setInput({
         ...input,
         [e.target.name]: e.target.value
       })
     }
+
+  //DELETE 
 function deleteItemList(id){
   dispatch(deleteData(id))
   dispatch(getDatas())
   dispatch(getDatas())
   
 }
+  //PUT 
 function updateItemList(dato){
 dispatch(updateData(dato._id , input))
 setModalEdit(false)
@@ -115,10 +119,10 @@ setInput({
   weight:0,
 })
 dispatch(getDatas())
-
-
 }
 
+
+//POST new Data
 function handleSubmit(e){
   e.preventDefault()
   console.log(input)
@@ -138,20 +142,16 @@ function handleSubmit(e){
 }
 
   return (
+    //INTERFACE
     <div className="App">
 <div className='navbar'>
 <div className='bellop'>
   <AiOutlineImport color='#5b5b5b' size={25}/>
- 
     </div>    
  <div className='outop'>
  <AiFillBell color='#5b5b5b' size={25}/>
-
  </div>
-
-
 </div>
-
 <div> <h5 className='subtitle'>Admin/Dispositivos</h5></div>
 <div className='titleOne'>
  <h1>Gestion De dispositivo </h1> 
@@ -168,6 +168,7 @@ function handleSubmit(e){
 <div  className='subTwo'>
 <h2>Lista de dispositivos</h2>
 </div>
+
 <div>
   <Table>
      <thead><tr>
@@ -195,11 +196,15 @@ function handleSubmit(e){
       </tr>
       ))
     }
-
-      
     </tbody>
   </Table>
 </div>
+
+
+
+
+
+      
 <div>
 <Paginado dataPerPage={dataPerPage} allData={allDatas.length} paginado={paginado} setCurrentPage={setCurrentPage}  currentPage={currentPage} />
 </div>
